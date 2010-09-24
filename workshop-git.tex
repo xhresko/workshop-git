@@ -1,8 +1,3 @@
-%\documentclass[blue]{beamer}
-%\usetheme{Boadilla}
-% Class options include: notes, notesonly, handout, trans,
-%                        hidesubsections, shadesubsections,
-%                        inrow, blue, red, grey, brown
 \documentclass[red]{beamer}
 
 
@@ -11,17 +6,17 @@
   \setbeamercovered{transparent}
 }
 
-% Theme for beamer presentation.
+
 \usepackage{beamerthemesplit} 
 \usepackage[czech]{babel}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{listings}
 
-\title{Distribuovaný systém kontroly verzií - Git}    % Enter your title between curly braces
-\author{Juraj Hreško}                 % Enter your name between curly braces
-\institute{ecommerce.cz}      % Enter your institute name between curly braces
-\date{\today}                    % Enter the date or \today between curly braces
+\title{Distribuovaný systém kontroly verzií - Git}    
+\author{Juraj Hreško}                 
+\institute{ecommerce.cz}      
+\date{\today}                 
 
 \begin{document}
 
@@ -30,12 +25,12 @@
 \end{frame}
 
 
-\section{Verzovacie systémy}
+\section{Verzovacie systémy} % 1. Kapitola
 
 
 
 \begin{frame}
-  \frametitle{Požiadavky na SCM}   % Insert frame title between curly braces
+  \frametitle{Požiadavky na SCM}   
   \begin{itemize}
   \item ukladanie dát do archívu (repozitára)
 \pause
@@ -56,7 +51,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Typy verzovacích systémov}   % Insert frame title between curly braces
+  \frametitle{Typy verzovacích systémov}   
   \begin{itemize}
   \item "triviálne"
   \item centralizované (client-server)
@@ -65,7 +60,7 @@
 \end{frame}
 
 \begin{frame}[fragile]
-  \frametitle{"Triviálne"  verzovanie}   % Insert frame title between curly braces
+  \frametitle{"Triviálne"  verzovanie}   
    
   Použil už snáď každý pri zálohe napr. konfiguračných súborov. 
 
@@ -85,7 +80,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Centralizované systémy pre správu verzií}   % Insert frame title between curly braces
+  \frametitle{Centralizované systémy pre správu verzií}   
 
 \begin{itemize}
 \item architektúra typu klient-server
@@ -101,7 +96,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Distribuované systémy pre správu verzií}   % Insert frame title between curly braces
+  \frametitle{Distribuované systémy pre správu verzií}   
 
 \begin{itemize}
 \item neexistuje centrálny repozitár - každý je plnohodnotný
@@ -111,10 +106,10 @@
  \end{itemize}
 \end{frame}
 
-\section{Výhody DSCM (Git)}
+\section{Výhody DSCM (Git)} % 2. Kapitola
 
 \begin{frame}
-  \frametitle{Práca s lokálnym repozitárom}   % Insert frame title between curly braces
+  \frametitle{Práca s lokálnym repozitárom}   
 
 \begin{itemize}
 \item neexistuje "jedno zraniteľné miesto" (single point of failure)
