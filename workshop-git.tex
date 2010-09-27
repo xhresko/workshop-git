@@ -33,19 +33,19 @@
   \frametitle{Požiadavky na SCM}   
   \begin{itemize}
   \item ukladanie dát do archívu (repozitára)
-\pause
+
   \item obnovenie dát z určitej doby
-\pause
+
   \item porovnávanie verzií dát
-\pause
+
   \item anotovanie dát
-\pause
+
   \item riešenie prítupu viacerých vývojárov
-\pause
+
  \item označovanie verzií špecifickým menom
-\pause
+
  \item vetvenie vývoja
-\pause
+
  \item zlučovanie vetví vývoja
   \end{itemize}
 \end{frame}
@@ -70,7 +70,7 @@
     c:\>copy config.cfg config.old
 \end{verbatim}
 \end{block}
-\pause
+
 \begin{itemize}
 \item vhodné pre jednu dostupnú "zálohu"
 \item nesystematické pre viac súborov s históriou
@@ -174,5 +174,72 @@
   \includegraphics[scale=1]{git-pics/workflow-c.png}
 \end{figure}
 \end{frame}
-	
+
+\section{Git} % 3. Kapitola	
+
+\subsection{Na úvod ku Gitu}
+\begin{frame}
+\frametitle{Krátko k histórii projektu}
+
+\textbf{ git \\
+ \textit{1.	a contemptible person, often a fool\\
+2.	a bastard}} \\ 
+\textbf{ \tiny{ (Collins English Dictionary)}}
+\begin{itemize}
+\item vznik v roku 2005, k účelu verzovania projektu linuxového jadra
+\item hlavné požiadavky 
+\begin{itemize}
+\item Take CVS as an example of what not to do; if in doubt, make the exact opposite decision
+\item Support a distributed, BitKeeper-like workflow
+\item Very strong safeguards against corruption, either accidental or malicious
+\item Very high performance
+ \end{itemize}
+\item spočiatku sada programov v Perl, Bash a C
+ \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Súčasnosť projektu}   
+
+\begin{itemize}
+\item voľne dostupný open source DSCM software
+\item stránky projektu \href{http://git-scm.com/}{http://git-scm.com/}
+\item používaný aj na väčších projektoch
+\begin{itemize}
+\item Git
+\item Linux Kernel
+\item Android
+\item Ruby on Rails
+\item Fedora
+\item VLC media player
+\item \dots
+ \end{itemize}
+\item primárne pre platformu GNU/Linux a ostatné Unix-like systémy - BSD, Solaris, Darwin
+\item pre MS Windows v Cygwin alebo port mysysgit
+\item základom je ovládanie cez príkazový riadok, dostupné však aj GUI a pluginy pre IDE (Eclipse, NetBeans, Visual Studio)
+ \end{itemize}
+\end{frame}
+
+\subsection{Práca s Gitom}
+
+\begin{frame}[fragile]
+\frametitle{Inštalácia}   
+
+Pre GNU/Linux  balíček v repozitári - git-core
+\begin{block}{Príklad}
+\begin{verbatim}
+$ yum install git-core		
+$ apt-get install git-core		
+\end{verbatim}
+\end{block}
+Pre MS Windows doporučujem kombináciu msysgit + TortoiseGit
+\begin{itemize}
+\item \href{http://code.google.com/p/msysgit/}{msysgit} - posledná verzia \href{ http://code.google.com/p/msysgit/downloads/detail?name=Git-1.7.2.3-preview20100911.exe}{Git 1.7.2.3}
+\item pri výbere komponent doporučujem zrušiť Windows Explorer integration (zabezpečí ho TortoiseGit)
+\item ostatné voľby podľa uváženia, osobne ponechávam východzie
+\item následne doinštalovať GUI klienta - \href{ http://code.google.com/p/tortoisegit/}{TortoiseGit}
+\item pri inštalácii je dobré zvoliť totožného SSH klienta ako u Gitu, v mojom prípade u oboch OpenSSH
+ \end{itemize}
+\end{frame}
+
 \end{document}
