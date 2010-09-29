@@ -1,5 +1,0 @@
-\beamer@endinputifotherversion {3.10pt}
-\select@language {czech}
-\beamer@sectionintoc {1}{Verzovacie syst\IeC {\'e}my}{2}{0}{1}
-\beamer@sectionintoc {2}{V\IeC {\'y}hody DSCM (Git)}{15}{0}{2}
-\beamer@subsectionintoc {2}{1}{Flexibiln\IeC {\'y} workflow}{17}{0}{2}

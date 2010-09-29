@@ -103,6 +103,7 @@
 \item miesto operácie checkout operácia clone
 \item repozitár == pracovná kópia
 \item publikovanie zmien - vystavenie repozitára, push do vzdialenej vetvy, posielanie záplat e-mailom
+\item zástupcovia: Monotone, Git, Mercurial, Bazaar
  \end{itemize}
 \end{frame}
 
@@ -240,6 +241,180 @@ Pre MS Windows doporučujem kombináciu msysgit + TortoiseGit
 \item následne doinštalovať GUI klienta - \href{ http://code.google.com/p/tortoisegit/}{TortoiseGit}
 \item pri inštalácii je dobré zvoliť totožného SSH klienta ako u Gitu, v mojom prípade u oboch OpenSSH
  \end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Veľmi stručný úvod k použitiu (Git) Bash}   
+Git Bash spustíme, z menu Programy/Git/Git Bash. Práca v Bash konzoli je podobná práci s príkazovým riadkom vo Windows/DOS. 
+Niekoľko základných príkazov:
+\\
+\begin{tabular}{|l||l|l|}
+
+\hline
+  {\bf Bash} & {\bf cmd.exe} &  {\bf Popis} \\
+\hline
+\hline
+  cd & cd   &  Zmení adresár  \\
+  cp & copy  & Skopíruje súbor(y) \\
+  rm & del  & Zmaže súbor(y) \\
+  mkdir & mkdir & Vytvorí adresár \\
+  ls & dir & Vypíše obsah adresáru \\
+  cd /c & c: & Zmení adresár na koreň disku C: \\
+\hline
+\end{tabular}
+\\ 
+Text zo schránky vkladáme pomocou Shift+Insert.
+Podrobná nápoveda k príkazu - parameter - - help
+\begin{block}{}
+\begin{verbatim}
+$ mkdir --help	
+\end{verbatim}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Založenie repozitára}   
+V ľubovoľnom existujúcom adresári zadáme príkaz \texttt{git init}
+
+\begin{block}{}
+\begin{verbatim}
+$ cd /c
+$ mkdir git-workshop
+$ mkdir testproject
+$ cd git-workshop/testproject
+$ git init
+Initialized empty Git repository in c:/git-workshop/testprojekt/.git/	
+\end{verbatim}
+\end{block}
+
+Po tomto kroku môžeme začať verzovať ľubovoľné súbory a adresáre, ktoré sa nachádzajú v adresári \texttt{testrepo}.
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Pred prvým commitom}   
+
+Po inštalácii Gitu je dobré nastaviť do konfigurácie správne údaje o autorovi.
+
+\begin{block}{}
+\begin{verbatim}
+$ git config --global user.name "Michal Muthsam"
+$ git config --global user.email muthsam@ecommerce.cz
+\end{verbatim}
+\end{block}
+Ďalej si pripravíme nejaký súbor, ktorý budeme v ďalšom kroku verzovať. Vytvoríme napríklad textový súbor ahoj.txt a vložíme do neho nejaký text. Toto môžeme spraviť v Notepade (prípadne inom editore), alebo priamo z konzole.
+\begin{block}{}
+\begin{verbatim}
+$ cd /c/testproject
+$ touch ahoj.txt
+$ echo Nazdar svet! > ahoj.txt
+\end{verbatim}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Náš prvý commit}   
+
+\begin{columns}
+\begin{column}[l]{7cm}
+Máme pripravený súbor a radi by sme ho pridali do repozitára. Najskôr označíme zmeny, ktoré chceme zahrnúť do commitu, v tomto prípade súbor ahoj.txt, pomocou príkazu git add. \\
+Potom použijeme git commit, s parametrom -m, ktorým pridáme popis commitu.
+\end{column}
+\begin{column}[r]{5cm}
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.9]{git-pics/staging1.png}
+\end{figure}
+\end{column}
+\end{columns} 
+\begin{block}{}
+\begin{verbatim}
+$ git add ahoj.txt
+$ git commit -m "Prvy commit do repa"
+[master (root-commit) deb7c00] Prvy commit do repa
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+ create mode 100644 ahoj.txt
+\end{verbatim}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Commit "po starom"}   
+
+\begin{columns}
+\begin{column}[l]{7cm}
+Samozrejme niekedy by sme uvítali automatický commit všetkých zmien, bez nutnosti ich označovania. K tomu to slúži parameter -a u príkazu git commit. 
+\end{column}
+\begin{column}[r]{5cm}
+\begin{figure}
+  \centering
+  \includegraphics[scale=0.9]{git-pics/staging2.png}
+\end{figure}
+\end{column}
+\end{columns} 
+\begin{block}{}
+\begin{verbatim}
+$ echo Hello world! >> ahoj.txt
+$ git commit -a -m "Pridany anglicky pozdrav"
+[master 141d9c3] Pridany anglicky pozdrav
+ 1 files changed, 1 insertions(+), 0 deletions(-)
+\end{verbatim}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Vytvorenie verejného repozitára}
+Git umožňuje pripojenie na vzdialený repozitár prostredníctvom HTTP, SSH, vlastného GIT protokolu, prípadne priamo cez súborový systém. \\
+Pre ilustráciu práce so vzdialeným repozitárom si vytvoríme takzvaný "bare" repozitár. Tento neobsahuje pracovnú kópiu a používa sa pre publikovanie zmien pre "okolitý svet". Niekedy sa používa aj označenie public repository. Pre jednoduchšie rozpoznanie je názov takéhoto repozitára doplnený príponou .git .
+
+\begin{block}{}
+\begin{verbatim}
+$ cd /c/git-workshop
+$ mkdir public_repos
+$ cd public_repos
+$ git clone --bare ../testproject
+Cloning into bare repository testproject.git...
+done.
+\end{verbatim}
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Pripojenie na existujúci repozitár}   
+Git umožňuje pripojenie na vzdialený repozitár prostredníctvom HTTP, SSH, vlastného GIT protokolu, prípadne priamo cez súborový systém. \\
+Aby sme nemuseli zadávať pri operáciách celú cestu k nášmu public repozitáru, pridáme si ho medzi tzv. remote.
+
+\begin{block}{}
+\begin{verbatim}
+$ cd /c/git-workshop/testproject
+$ git remote add origin ../public_repos/testproject.git/
+$ git remote
+origin
+\end{verbatim}
+\end{block}
+
+Odteraz sa na náš public repozitár môžeme odkazovať pod menom "origin". Podobne je možné pridať viacero ďalších aliasov pre vzdialené repozitáre. Vśetky nastavené si zobrazíme príkazom git remote.
+
+\end{frame}
+
+\begin{frame}[fragile]
+\frametitle{Odosielanie a sťahovanie zmien}   
+Pre operácie so vzdialeným repozitárom slúžia (okrem iných) príkazy git push a git pull.\\
+Na ukážku zmenu v repozitári testproject vypropagujeme do public repozitára testproject.git (origin).
+
+\begin{block}{}
+\begin{verbatim}
+$ cd /c/git-workshop/testproject
+$ sed -i 's/Nazdar/Ahojl/g' ahoj.txt 
+$ git commit -a -m "zamena nazdar za ahoj"
+[master 483f007] zamena nazdar za ahoj
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+$ git push origin master
+Counting objects: 5, done.
+...
+To ../public_repos/testproject.git/
+    141d9c3..483f007  mastes -> master
+\end{verbatim}
+\end{block}
 \end{frame}
 
 \end{document}
